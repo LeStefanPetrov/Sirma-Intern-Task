@@ -1,0 +1,14 @@
+E:\Programming\Uni\Sirma Intern Task\Sirma Intern Task\bin\Debug\Sirma Intern Task.exe.config
+E:\Programming\Uni\Sirma Intern Task\Sirma Intern Task\bin\Debug\Sirma Intern Task.exe
+E:\Programming\Uni\Sirma Intern Task\Sirma Intern Task\bin\Debug\Sirma Intern Task.pdb
+E:\Programming\Uni\Sirma Intern Task\Sirma Intern Task\obj\Debug\Sirma Intern Task.csprojAssemblyReference.cache
+E:\Programming\Uni\Sirma Intern Task\Sirma Intern Task\obj\Debug\Sirma Intern Task.csproj.CoreCompileInputs.cache
+E:\Programming\Uni\Sirma Intern Task\Sirma Intern Task\obj\Debug\Sirma Intern Task.exe
+E:\Programming\Uni\Sirma Intern Task\Sirma Intern Task\obj\Debug\Sirma Intern Task.pdb
+E:\Programming\SideWork\C#\Sirma Intern Task\Sirma Intern Task\bin\Debug\Sirma Intern Task.exe.config
+E:\Programming\SideWork\C#\Sirma Intern Task\Sirma Intern Task\bin\Debug\Sirma Intern Task.exe
+E:\Programming\SideWork\C#\Sirma Intern Task\Sirma Intern Task\bin\Debug\Sirma Intern Task.pdb
+E:\Programming\SideWork\C#\Sirma Intern Task\Sirma Intern Task\obj\Debug\Sirma Intern Task.csprojAssemblyReference.cache
+E:\Programming\SideWork\C#\Sirma Intern Task\Sirma Intern Task\obj\Debug\Sirma Intern Task.csproj.CoreCompileInputs.cache
+E:\Programming\SideWork\C#\Sirma Intern Task\Sirma Intern Task\obj\Debug\Sirma Intern Task.exe
+E:\Programming\SideWork\C#\Sirma Intern Task\Sirma Intern Task\obj\Debug\Sirma Intern Task.pdb
