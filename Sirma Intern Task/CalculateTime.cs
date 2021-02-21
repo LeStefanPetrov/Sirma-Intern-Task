@@ -31,58 +31,57 @@ namespace Sirma_Intern_Task
 
         public void CalculateTimeSpan() // Calculates the biggest timespan of two employees working on a same project
         {
-            double timespan = 0, maxTimeSpan = 0, employee1 = 0, employee2 = 0, projectId = 0;
-
+            int timespan = 0;
+            var WorkedTogether = new List<WorkedOnProject>();
             for (int i = 0; i < employees.Count; i++)
             {
                 for (int j = i; j < employees.Count; j++)
                 {
                     if (employees[i].EmpId != employees[j].EmpId && employees[i].ProjectId == employees[j].ProjectId && employees[i].DateTo > employees[j].DateFrom && employees[j].DateTo > employees[i].DateFrom)
                     {
-                        int DateFrom = DateTime.Compare(employees[i].DateFrom, employees[j].DateFrom);
-                        int DateTo = DateTime.Compare(employees[i].DateTo, employees[j].DateTo);
-                        
-                        // Cases where the DateFrom or the DateTo (or both) are equal, are not assumed (written)
+                        timespan = CalculateRange(employees[i].DateFrom,employees[i].DateTo,employees[j].DateFrom,employees[j].DateTo);
 
-                        if (employees[i].DateFrom < employees[j].DateFrom && employees[i].DateTo < employees[j].DateTo)
-                        {
-                            timespan = (employees[i].DateTo - employees[j].DateFrom).TotalDays;
-                        }
-                        else if (employees[i].DateFrom < employees[j].DateFrom && employees[i].DateTo > employees[j].DateTo)
-                        {
-                            timespan = (employees[j].DateTo - employees[j].DateFrom).TotalDays;
-                        }
-                        else if (employees[i].DateFrom > employees[j].DateFrom && employees[i].DateTo < employees[j].DateTo)
-                        {
-                            timespan = (employees[i].DateTo - employees[i].DateFrom).TotalDays;
-                        }
-                        else if (employees[i].DateFrom > employees[j].DateFrom && employees[i].DateTo > employees[j].DateTo)
-                        {
-                            timespan = (employees[j].DateTo - employees[j].DateFrom).TotalDays;
-                        }
+                        WorkedTogether.Add(new WorkedOnProject(employees[i].EmpId, employees[j].EmpId, employees[i].ProjectId, timespan));
                     }
-                    if (timespan > maxTimeSpan)
-                    {
-                        maxTimeSpan = timespan;
-                        employee1 = employees[i].EmpId;
-                        employee2 = employees[j].EmpId;
-                        projectId = employees[i].ProjectId;
-                    }
-
                 }
             }
-            if (maxTimeSpan == 0) 
-            { 
-                Console.WriteLine("\nNo Solutions!");
-            }
-            else
-            {
-                TimeSpan result = TimeSpan.FromDays(maxTimeSpan);
-                Console.WriteLine("\nThe longest couple of employees who worked on a same project are employee {0} and employee {1}, who worked on project {2} for {3} days", employee1, employee2, projectId, result.Days);
-
-            }
+            //creating new list and grouping using LINQ 
+            var result = WorkedTogether.GroupBy(x => new { x.EmployeeID1, x.EmployeeID2 })
+                                       .Select(w => new WorkedOnProject()
+                                       {
+                                           EmployeeID1 = w.Key.EmployeeID1,
+                                           EmployeeID2 = w.Key.EmployeeID2,
+                                           TotalDays = w.Sum(d => d.TotalDays)
+                                       }
+                                       ).OrderByDescending(w => w.TotalDays).ToList().First();
+            
+            Console.Write("\nEmployees who worked together:");
+            Console.WriteLine("\nEmployee ID 1:"+result.EmployeeID1+ "\nEmployee ID 2:" + result.EmployeeID2 +"\nTotal days together:" + result.TotalDays);
         }
 
+
+        public int CalculateRange (DateTime DateFrom1,DateTime DateTo1,DateTime DateFrom2,DateTime DateTo2) // Calculates the timespan 
+        {
+            double timespan = 0;
+            if (DateFrom1 <= DateFrom2 && DateTo1 <= DateTo2)
+            {
+                timespan = (DateTo1 - DateFrom2).TotalDays;
+            }
+            else if (DateFrom1 <= DateFrom2 && DateTo1 >= DateTo2)
+            {
+                timespan = (DateTo2 - DateFrom2).TotalDays;
+            }
+            else if (DateFrom1 >= DateFrom2 && DateTo1 <= DateTo2)
+            {
+                timespan = (DateTo1 - DateFrom1).TotalDays;
+            }
+            else if (DateFrom1 >= DateFrom2 && DateTo1 >= DateTo2)
+            {
+                timespan = (DateTo2 - DateFrom1).TotalDays;
+            }
+
+            return (int)timespan;
+        }
         public void PrintData() // Prints the whole list
         {
             foreach(var employee in employees)
